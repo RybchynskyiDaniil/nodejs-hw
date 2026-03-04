@@ -1,6 +1,7 @@
 import { isValidObjectId } from 'mongoose';
 import { Joi, Segments  } from 'celebrate';
-import { TAGS } from '../constants/tags';
+import { TAGS } from '../constants/tags.js';
+
 
 export const getAllNotesSchema = {
   [Segments.QUERY]: Joi.object({
