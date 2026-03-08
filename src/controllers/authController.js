@@ -43,7 +43,7 @@ export const loginUser = async (req, res) => {
   await Session.deleteOne({ userId: user._id });
    const newSession = await createSession(user._id);
   setSessionCookies(res, newSession);
-  res.status(201).json(user);
+  res.status(200).json(user);
 };
 
 export const refreshUserSession = async (req, res) => {
