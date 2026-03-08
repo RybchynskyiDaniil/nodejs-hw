@@ -1,6 +1,7 @@
 import { errorHandler } from './middleware/errorHandler.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import notesRoutes from "./routes/notesRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { logger } from './middleware/logger.js';
 import express from 'express';
 import cors from 'cors';
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 app.use(logger);
 app.use(notesRoutes);
+app.use(authRoutes);
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);
