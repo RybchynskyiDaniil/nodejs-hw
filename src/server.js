@@ -12,7 +12,6 @@ import { errors } from 'celebrate';
 import userRoutes from './routes/userRoutes.js';
 
 const app = express();
-const PORT = process.env.PORT ?? 3000;
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
@@ -23,8 +22,20 @@ app.use(userRoutes);
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);
-await connectMongoDB();
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const startServer = async () => {
+  try {
+    await connectMongoDB();
 
-});
+    const PORT = process.env.PORT || 3000;
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+};
+
+startServer();
